@@ -5,9 +5,11 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Notification;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     String notificationMessage = "";
     boolean notiFlag=false;
     Switch switch1, switch2, switch3;
+    Button mapIntentButton;
 
 
 
@@ -55,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
         switch1 = findViewById(R.id.switch1);
         switch2 = findViewById(R.id.switch2);
         switch3 = findViewById(R.id.switch3);
+        mapIntentButton = findViewById(R.id.go_to_map_intent_button);
+        mapIntentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),BusLocationActivity.class));
+            }
+        });
 
         notificationManager = NotificationManagerCompat.from(this);
 
