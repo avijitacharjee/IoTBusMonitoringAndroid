@@ -58,13 +58,8 @@ public class MainActivity extends AppCompatActivity {
         switch1 = findViewById(R.id.switch1);
         switch2 = findViewById(R.id.switch2);
         switch3 = findViewById(R.id.switch3);
-        mapIntentButton = findViewById(R.id.go_to_map_intent_button);
-        mapIntentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),BusLocationActivity.class));
-            }
-        });
+        //mapIntentButton = findViewById(R.id.go_to_map_intent_button);
+
 
         notificationManager = NotificationManagerCompat.from(this);
 
@@ -82,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
             mainHandler.postDelayed(runnable,1000);
         }
     };
+
     public void volley()
     {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());

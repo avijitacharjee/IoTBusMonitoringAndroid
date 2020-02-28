@@ -3,7 +3,9 @@ package com.example.iotbusmonitoringsystem;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -40,8 +42,10 @@ public class BusLocationActivity extends FragmentActivity implements OnMapReadyC
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        String lat[] = getIntent().getExtras().getString("location").split(",");
+        LatLng sydney = new LatLng(Double.valueOf(lat[0]), Double.valueOf(lat[1]));
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        Toast.makeText(this, getIntent().getExtras().getString("location"), Toast.LENGTH_SHORT).show();
     }
 }
