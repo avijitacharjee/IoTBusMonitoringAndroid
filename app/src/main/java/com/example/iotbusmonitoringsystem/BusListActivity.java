@@ -25,7 +25,11 @@ public class BusListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0)
                 {
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(),Start.class));
+                }
+                if (position==4)
+                {
+                    startActivity(new Intent(getApplicationContext(),Start.class));
                 }
             }
         });

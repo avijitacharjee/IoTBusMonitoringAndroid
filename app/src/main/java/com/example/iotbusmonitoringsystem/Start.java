@@ -32,12 +32,15 @@ public class Start extends AppCompatActivity {
         statusIntentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),BusListActivity.class));
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
         findViewById(R.id.location_intent).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),BusLocationActivity.class);
+                intent.putExtra("location","0.00,0.00");
+                startActivity(intent);
                 getLocation();
             }
         });

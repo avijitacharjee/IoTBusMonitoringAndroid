@@ -59,14 +59,94 @@ public class MainActivity extends AppCompatActivity {
         switch2 = findViewById(R.id.switch2);
         switch3 = findViewById(R.id.switch3);
         //mapIntentButton = findViewById(R.id.go_to_map_intent_button);
+        switch1.setVisibility(View.GONE);
+        switch2.setVisibility(View.GONE);
+        switch3.setVisibility(View.GONE);
 
 
         notificationManager = NotificationManagerCompat.from(this);
-
+        checkVol();
         volley();
         mainHandler.postDelayed(runnable,300);
 
 
+    }
+    public void checkVol()
+    {
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String url ="http://androstar.tk/bus_sit_management_system/api.php";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject resp = new JSONObject(response);
+                            JSONArray respArr = resp.getJSONArray("data");
+                            JSONObject sits = respArr.getJSONObject(0);
+                            String sit1 = sits.getString("sit1");
+                            String sit2 = sits.getString("sit2");
+                            String sit3 = sits.getString("sit3");
+
+                            if(sit1.equalsIgnoreCase("1"))
+                            {
+                                switch1.setChecked(true);
+                            }
+                            else
+                            {
+                                switch1.setChecked(false);
+                            }
+                            if(sit2.equalsIgnoreCase("1"))
+                            {
+                                switch2.setChecked(true);
+                            }
+                            else
+                            {
+                                switch2.setChecked(false);
+                            }
+                            if(sit3.equalsIgnoreCase("1"))
+                            {
+                                switch3.setChecked(true);
+                            }
+                            else
+                            {
+                                switch3.setChecked(false);
+                            }
+
+                        } catch (Exception e)
+
+                        {
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(MainActivity.this, ""+error, Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+            /* passing request body */
+            protected Map<String,String> getParams()
+            {
+                Map<String,String> params = new HashMap<String,String>() ;
+                params.put("apiKey","1999");
+                params.put("bookStatus","1");
+
+                return params;
+            }
+            /** Passing some request headers* */
+            @Override
+            public Map getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Content-Type", "application/json");
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+        queue.add(stringRequest);
     }
 
     private Runnable runnable = new Runnable() {

@@ -55,11 +55,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
     }
 
     private void isRegistered(final User user)
@@ -78,7 +73,7 @@ public class Login extends AppCompatActivity {
                             if(response.equals("user"))
                             {
                                 Toast.makeText(getApplicationContext(),"Logged in",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),Start.class));
+                                startActivity(new Intent(getApplicationContext(),Index.class));
                             }
                             else
                             {
@@ -86,14 +81,14 @@ public class Login extends AppCompatActivity {
                             }
                         }catch (Exception e)
                         {
-                            // Toast.makeText(LoginActivity.this, "Json Exception", Toast.LENGTH_SHORT).show();
+                             Toast.makeText(Login.this, "Json Exception", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 /*textView.setText("Failed"+error.toString());*/
-                //Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Internet not connected",Toast.LENGTH_LONG).show();
             }
         }){
 
